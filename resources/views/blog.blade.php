@@ -9,11 +9,9 @@
 
   <div class="container">
     <div class="navbar">
-       
+        <a href="{{url('/')}}">Home</a>
         <a href="{{url('/dashboard')}}">Dashboard</a>
-        <a href="{{url('/post/view')}}">Post</a>
-        <a href="{{('/about')}}">About</a>
-        
+        <a href="{{url('/post/view')}}">My Blogs</a> 
     </div>
       
     <!-- Blog Post -->
@@ -156,9 +154,6 @@
     .blog-form input[type="submit"]:hover {
       background-color: #0056b3;
     }
-
-  
-    
   </style>
  
   

@@ -5,10 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+
+    /*
+    // This function can be used to retrive all the post from all of the users
+    */
+    public function allpost()
+    {
+        $posts = Post::orderBy("created_at", "desc")->paginate(10);
+        return view("post.index", compact("posts"));
+    }
+    public function addComment(Request $request)
+    {
+        $comment = new Comment;
+        $comment->comments = $request['comment'];
+        $comment->post_id = Auth::id();
+        $comment->user_id = Auth::id();
+        $comment->save();
+        return redirect()->route('post.index')->with('success', 'Comment addded');
+    }
+
     public function blogIndex()
     {
         return view("blog");
@@ -17,7 +37,7 @@ class BlogController extends Controller
     public function blogContent(Request $request)
     {
         $user = Auth::User();
-        $save = new post;
+        $save = new Post;
         $save->title = $request['title'];
         $save->content = $request['content'];
         $save->user_id = Auth::id();
@@ -27,13 +47,14 @@ class BlogController extends Controller
     public function display()
     {
         $user = Auth::User();
-        $stored = post::all();
-        return view('post', compact('stored'));
+        $id = $user->id;
+        $stored = Post::where('user_id', '=', $id)->get();
+        return view('Post', compact('stored'));
     }
     public function edit($id)
     {
         $user = Auth::User();
-        $title = post::find($id);
+        $title = Post::find($id);
         return view('edit', compact('title'));
     }
     public function update(Request $request, $id)
@@ -41,15 +62,12 @@ class BlogController extends Controller
         $title = Post::find($id);
         // $title->title = $request->editTitle;
         // $title->content = $request->editContent;
-
         $title->update($request->only('title', 'content'));
-        
-        return redirect('post/view')->with('status', 'Blog edited Successfully');
+        return redirect('post/view');
     }
     public function delete($id)
     {
-
-        $title = post::find($id)->delete();
-        return redirect('post/view')->with('status', 'Data Deleted successfully');
+        $title = Post::find($id)->delete();
+        return redirect('post/view')->with('success', 'Data Deleted successfully');
     }
 }

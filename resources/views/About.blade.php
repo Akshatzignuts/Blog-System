@@ -13,7 +13,7 @@
        
             <div class="navbar">
                
-                <a href="http://127.0.0.1:8000/dashboard">Dashboard</a>
+                <a href="{{url('/dashbo')}}">Dashboard</a>
                 <a href="http://127.0.0.1:8000/Blog">Blog</a>
                 <a href="http://127.0.0.1:8000/post">Post</a>
                 <a href="http://127.0.0.1:8000/about">About</a>

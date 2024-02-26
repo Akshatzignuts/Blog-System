@@ -14,7 +14,7 @@
         }
         .result
         {
-            width: 80%;
+            width: 100%;
             background-color: wheat;
             padding: 10px;
             margin: 30px;
@@ -37,6 +37,44 @@
             color: #888;
             margin-bottom: 5px;
         }
+        .comment-form {
+    margin-top: 50px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .comment-form input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  .comment-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .comment-form button:hover {
+    background-color: #0056b3;
+  }
     </style>
 </head>
 <body>
@@ -49,11 +87,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/blog')}}">Blog</a>
+                    <a class="nav-link" href="{{url('/')}}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/blog')}}">Create Blog</a>
+                </li>
+               
             </ul>
         </div>
     </nav>
@@ -62,21 +104,21 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
-                <h2>Blog Posts</h2>
+                <h2>My Blogs Posts</h2>
+
+                
                 @foreach($stored as $result)
                 <div class = "result">
                     
-                    <div class="title">Title:  {{ $result->title }}</div>
-                    <div class="content">Content:  {{ $result->content }}</div>
+                    <div class="title"><strong>Title :</strong>  {{ $result->title }}</div>
+                    <div class="content"><strong>Content :</strong> {{ $result->content }}</div>
                     <div class="row mt-3">
-                         
-                       
                             <div class="col">
-                                <a href="{{url('/edit/blog'.$result->id)}}" class="btn btn-primary">Edit</a>
+                                <a href="{{url('/edit/blog'. $result->id)}}" class="btn btn-primary">Edit</a>
                             </div>
                             <div class="col">
-                                <a href="{{url('/post/view')}}/{{$result->id}}" class="btn btn-danger">Delete</a>
-                            </div>                
+                                <a href="{{url('/post/view') . "/" . $result->id}}" class="btn btn-danger">Delete</a>
+                            </div>        
                     </div>
                 </div>
                 @endforeach

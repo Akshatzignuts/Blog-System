@@ -26,18 +26,24 @@ Route::get('/dashboard', function () {
 Route::get('/about', function () {
     return view('about');
 });
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/dash', [BlogController::class, 'allpost']);
+Route::get('/', [BlogController::class, 'addComment']);
 Route::get('/blog', [BlogController::class, 'blogIndex']);
 Route::post('/blog/create', [BlogController::class, 'blogContent']);
 Route::get('/post', [postController::class, 'postIndex']);
-Route::get('/post/view', [BlogController::class, 'display']);
-Route::get('/your/Blogs', [yourController::class, 'show']);
+Route::get('/post/view', [BlogController::class, 'display'])->middleware('auth');
 Route::get('/edit/blog{id}', [BlogController::class, 'edit']);
 Route::post('/edit/{id}', [BlogController::class, 'update']);
-Route::get('blog/delete{id}', [BlogController::class, 'remove']);
+Route::get('/post/view/{id}', [BlogController::class, 'delete']);
+
+
+// Route::get('/all/blogs', [yourController::class, 'allPost']);
 require __DIR__ . '/auth.php';

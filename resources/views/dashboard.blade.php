@@ -16,12 +16,13 @@
     </div>
     <div>
         <div class= "button">
-            <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Click for contet page</button></a>
+            <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Create Blogs</button></a>
           </div>
           <div class= "button">
-            <a href = "{{url('/post/view')}}"><button class="btn-content" type="submit">Click for Post page</button></a>
+            <a href = "{{url('/post/view')}}"><button class="btn-content" type="submit">My Blogs</button></a>
           </div>
     </div>
+    
 </x-app-layout>
 <style>
     .button
