@@ -4,9 +4,7 @@
             {{ __('Dashboard') }}
         </h2>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </x-slot>
-
-    
+    </x-slot>   
     <div>
         <span class = "button">
             <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Create Blogs</button></a>
@@ -24,7 +22,6 @@
                             {{ session('message') }}
                         </div>
                 @endif 
-
                 <!--it can dispaly all blogs posted  -->
                 @foreach($posts as $post)
                     <div class = "result grid-table">
@@ -77,6 +74,7 @@
             padding: 20px;
             margin-bottom: 20px;
             background-color:wheat; 
+           
         }
     .result
     {
@@ -85,6 +83,7 @@
         padding: 10px;
         margin: 30px;
         border-radius: 25px;
+        align-items: center;
 
      }
         .blog-post .title {
@@ -140,6 +139,7 @@
 
   .comment-form button:hover {
     background-color: #0056b3;
+    font-family:'Arial Narrow Bold';
   }
 
 

@@ -45,6 +45,4 @@ Route::get('/post/view', [BlogController::class, 'display'])->middleware('auth')
 Route::get('/edit/blog{id}', [BlogController::class, 'edit']);
 Route::post('/edit/{id}', [BlogController::class, 'update']);
 
-
-
 require __DIR__ . '/auth.php';

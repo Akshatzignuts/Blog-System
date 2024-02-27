@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
 
-
     // This function can be used to retrive all the post from all of the users
     public function allpost()
     {
@@ -19,6 +18,7 @@ class BlogController extends Controller
         return view("post.index", compact("posts"));
     }
     //This function can be used to add comment on blog post
+
     public function addComment(Request $request)
     {
         $comment = new Comment;
@@ -28,6 +28,8 @@ class BlogController extends Controller
         $comment->save();
         return redirect()->back()->with('message', 'Comment addded successfully');
     }
+
+
     //This function can be used to just see the Blog page where we can write the code 
     public function blogIndex()
     {

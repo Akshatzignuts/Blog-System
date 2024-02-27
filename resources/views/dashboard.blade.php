@@ -14,8 +14,8 @@
             </div>
         </div>
     </div>
-    <!-- To Create Blog  -->
-    <!-- To see my Blogs  -->
+   
+    <!--button to go other pages--> 
     <div>
         <span class= "button">
             <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Create Blogs</button></a>

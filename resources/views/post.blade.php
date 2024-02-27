@@ -38,43 +38,43 @@
             margin-bottom: 5px;
         }
         .comment-form {
-    margin-top: 50px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+            margin-top: 50px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-  .comment-form input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+        .comment-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-  .comment-form input[type="text"]:focus {
-    outline: none;
-    border-color: #007bff;
-  }
+        .comment-form input[type="text"]:focus {
+            outline: none;
+            border-color: #007bff;
+        }
 
-  .comment-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+        .comment-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-  .comment-form button:hover {
-    background-color: #0056b3;
-  }
+        .comment-form button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -113,14 +113,12 @@
     <!-- Blog Posts section -->
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6 mb-6 ">
                 <h2>My Blogs Posts</h2>
-
-               
                 @foreach($stored as $result)
                 <div class = "result">
                     
-                    <div class="title"><strong>Title :</strong>  {{ $result->title }}</div>
+                    <div class="title col "><strong>Title :</strong>  {{ $result->title }}</div>
                     <div class="content "><strong>Content :</strong> {{ $result->content }}</div>
                     <div class="row mt-3">
                             <div class="col">
