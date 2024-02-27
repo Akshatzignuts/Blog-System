@@ -8,30 +8,35 @@
 
     
     <div>
-        <div class= "button">
+        <span class = "button">
             <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Create Blogs</button></a>
-          </div>
-          <div class= "button">
             <a href = "{{url('/post/view')}}"><button class="btn-content" type="submit">My Blogs</button></a>
-          </div>
+        <span>
     </div>
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
                 <h2>Alls Blogs Posts</h2>
-                        
+
+                <!--it can dispaly success message  -->
+                @if(session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                @endif 
+
+                <!--it can dispaly all blogs posted  -->
                 @foreach($posts as $post)
-                <div class = "result grid-table">
-                    
-                    <div class="title"><strong>Title :</strong>  {{ $post->title }}</div>
-                    <div class="content"><strong>Content :</strong> {{ $post->content }}</div>
-                    <form>
-                       
-                        <div><textarea class="" id="comment" name="comment" rows="1" required></textarea></div>
-                        <button class="btn btn-primary">Comment</button>
-                    </form>
-                </div>
-                @endforeach
+                    <div class = "result grid-table">
+                        <div class="title"><strong>Title :</strong>  {{ $post->title }}</div>
+                        <div class="content"><strong>Content :</strong> {{ $post->content }}</div>
+                        <form method="post" action = {{url('/all/blogs')}}>
+                        @csrf
+                            <div><textarea class="" id="comment" name="comment" rows="1" required></textarea></div>
+                            <button class="btn btn-primary">Comment</button>
+                        </form>
+                    </div>
+                @endforeach 
             </div>
         </div>
     </div>
@@ -41,6 +46,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <style>
     .button
     {
@@ -49,6 +55,7 @@
         justify-content: center;
         align-items: center;
         padding: 10px;
+        gap: 20px;
 
     }
     .btn-content
@@ -70,15 +77,15 @@
             margin-bottom: 20px;
             background-color:wheat; 
         }
-        .result
-        {
-            width: 100%;
-            background-color: wheat;
-            padding: 10px;
-            margin: 30px;
-            border-radius: 25px;
+    .result
+    {
+        width: 100%;
+        background-color: wheat;
+        padding: 10px;
+        margin: 30px;
+        border-radius: 25px;
 
-        }
+     }
         .blog-post .title {
             font-size: 24px;
             font-weight: bold;

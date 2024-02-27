@@ -11,15 +11,15 @@
     <div class="navbar">
         <a href="{{url('/')}}">Home</a>
         <a href="{{url('/dashboard')}}">Dashboard</a>
+        <a href="{{url('/blog')}}">Create Blog</a>
         <a href="{{url('/post/view')}}">My Blogs</a> 
+        <a href="{{url('/')}}">All Blogs</a>
     </div>
       
     <!-- Blog Post -->
     <div class="blog-post">
       <h2 class="blog-title">Welcome To The Blog World!</h2>
-      <div class="blog-content">
-        
-      </div>
+      <div class="blog-content"> </div>
     </div>
     <!-- Blog Post Form -->
     <div class="blog-form">
@@ -29,17 +29,15 @@
         <input type="text" name="title" placeholder="Title" required>
         <textarea name="content" placeholder="Content" rows="7" required></textarea>
         <input type="submit" value="Publish">
-      </form>
+      </form> 
     </div>
-  </div>
-  
-</head>
-<body>
-
+  </div> 
 </body>
 </html>
+
+<!-- css for page  -->
 <style>
-    body {
+body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;

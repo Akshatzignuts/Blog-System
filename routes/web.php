@@ -34,8 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/dash', [BlogController::class, 'allpost']);
-Route::get('/', [BlogController::class, 'addComment']);
+
+Route::get('all/blogs', [BlogController::class, 'allpost']);
+Route::post('all/blogs', [BlogController::class, 'addComment']);
 Route::get('/blog', [BlogController::class, 'blogIndex']);
 Route::post('/blog/create', [BlogController::class, 'blogContent']);
 Route::get('/post', [postController::class, 'postIndex']);
@@ -45,5 +46,4 @@ Route::post('/edit/{id}', [BlogController::class, 'update']);
 Route::get('/post/view/{id}', [BlogController::class, 'delete']);
 
 
-// Route::get('/all/blogs', [yourController::class, 'allPost']);
 require __DIR__ . '/auth.php';

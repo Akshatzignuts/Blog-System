@@ -53,16 +53,15 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/post/view')}}">My Blogs</a>
-                </li>
-               
-                
-        
+                </li>   
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs</a>
+                </li>              
             </ul>
         </div>
     </nav>
-
-        <div class="modal-content">
-                
+        <!-- Blog Post edit section-->
+        <div class="modal-content">         
                 <div class="modal-body">
                     <form action="{{url('/edit').'/'.$title->id}}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -78,26 +77,11 @@
                        <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
                 </div>
-            <div class="modal-footer">
-                  
-                    
-                </div>
-            </div>
-        
-
-   
+        <div class="modal-footer">     
+            
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Custom JavaScript -->
-    <script>
-        function openEditModal(id) {
-            // Fetch blog post data based on ID and populate the modal fields
-            // For demonstration purposes, I'm just alerting the ID here
-            alert("Editing blog post with ID: " + id);
-            $('#editModal').modal('show');
-        }
-    </script>
 </body>
 </html>

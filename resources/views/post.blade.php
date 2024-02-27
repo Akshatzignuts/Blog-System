@@ -95,23 +95,33 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/blog')}}">Create Blog</a>
                 </li>
-               
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/post/view')}}">My Blogs</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs</a>
+                </li> 
             </ul>
         </div>
     </nav>
-
+    <!-- Blog Posts success message -->
+    @if(session('message'))
+    <div class="alert alert-success">
+    {{ session('message') }}
+    </div>
+    @endif
     <!-- Blog Posts section -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
                 <h2>My Blogs Posts</h2>
 
-                
+               
                 @foreach($stored as $result)
                 <div class = "result">
                     
                     <div class="title"><strong>Title :</strong>  {{ $result->title }}</div>
-                    <div class="content"><strong>Content :</strong> {{ $result->content }}</div>
+                    <div class="content "><strong>Content :</strong> {{ $result->content }}</div>
                     <div class="row mt-3">
                             <div class="col">
                                 <a href="{{url('/edit/blog'. $result->id)}}" class="btn btn-primary">Edit</a>
@@ -125,10 +135,13 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+<style>
+    
+</style>

@@ -4,7 +4,7 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    <!-- Logged in message section -->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -14,16 +14,18 @@
             </div>
         </div>
     </div>
+    <!-- To Create Blog  -->
+    <!-- To see my Blogs  -->
     <div>
-        <div class= "button">
+        <span class= "button">
             <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Create Blogs</button></a>
-          </div>
-          <div class= "button">
             <a href = "{{url('/post/view')}}"><button class="btn-content" type="submit">My Blogs</button></a>
-          </div>
+            <a href = "{{url('/all/blogs')}}"><button class="btn-content" type="submit">All Blogs</button></a>
+          </span>
     </div>
     
 </x-app-layout>
+<!-- css  -->
 <style>
     .button
     {
@@ -32,6 +34,8 @@
         justify-content: center;
         align-items: center;
         padding: 10px;
+        gap: 20px;
+       
 
     }
     .btn-content

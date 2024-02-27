@@ -19,21 +19,22 @@ class BlogController extends Controller
         $posts = Post::orderBy("created_at", "desc")->paginate(10);
         return view("post.index", compact("posts"));
     }
+
     public function addComment(Request $request)
     {
+
         $comment = new Comment;
         $comment->comments = $request['comment'];
         $comment->post_id = Auth::id();
         $comment->user_id = Auth::id();
         $comment->save();
-        return redirect()->route('post.index')->with('success', 'Comment addded');
+        return redirect()->back()->with('message', 'Comment addded successfully');
     }
 
     public function blogIndex()
     {
         return view("blog");
     }
-
     public function blogContent(Request $request)
     {
         $user = Auth::User();
@@ -42,7 +43,7 @@ class BlogController extends Controller
         $save->content = $request['content'];
         $save->user_id = Auth::id();
         $save->save();
-        return redirect('post/view')->with('succes', 'Blog posted successfully');
+        return redirect('post/view')->with('message', 'Blog posted successfully');
     }
     public function display()
     {
@@ -55,7 +56,7 @@ class BlogController extends Controller
     {
         $user = Auth::User();
         $title = Post::find($id);
-        return view('edit', compact('title'));
+        return view('edit', compact('title'))->with('success', 'Edited Successfully');
     }
     public function update(Request $request, $id)
     {
