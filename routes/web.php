@@ -40,10 +40,11 @@ Route::post('all/blogs', [BlogController::class, 'addComment']);
 Route::get('/blog', [BlogController::class, 'blogIndex']);
 Route::post('/blog/create', [BlogController::class, 'blogContent']);
 Route::get('/post', [postController::class, 'postIndex']);
+Route::get('/post/view/{id}', [BlogController::class, 'delete']);
 Route::get('/post/view', [BlogController::class, 'display'])->middleware('auth');
 Route::get('/edit/blog{id}', [BlogController::class, 'edit']);
 Route::post('/edit/{id}', [BlogController::class, 'update']);
-Route::get('/post/view/{id}', [BlogController::class, 'delete']);
+
 
 
 require __DIR__ . '/auth.php';

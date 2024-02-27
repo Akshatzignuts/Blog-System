@@ -33,6 +33,7 @@
                         <form method="post" action = {{url('/all/blogs')}}>
                         @csrf
                             <div><textarea class="" id="comment" name="comment" rows="1" required></textarea></div>
+                            <input type="hidden" name="post_id" value={{$post->id}}>
                             <button class="btn btn-primary">Comment</button>
                         </form>
                     </div>

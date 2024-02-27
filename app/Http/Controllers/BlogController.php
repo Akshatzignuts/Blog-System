@@ -23,7 +23,7 @@ class BlogController extends Controller
     {
         $comment = new Comment;
         $comment->comments = $request['comment'];
-        $comment->post_id = Auth::id();
+        $comment->post_id =  $request['post_id'];
         $comment->user_id = Auth::id();
         $comment->save();
         return redirect()->back()->with('message', 'Comment addded successfully');
