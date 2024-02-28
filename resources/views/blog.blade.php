@@ -16,13 +16,26 @@
 </head>
 <body>
   <div class="container">
-    <div class="navbar">
-        <a href="{{url('/')}}">Home</a>
-        <a href="{{url('/dashboard')}}">Dashboard</a>
-        <a href="{{url('/blog')}}">Create Blog</a>
-        <a href="{{url('/post/view')}}">My Blogs</a> 
-        <a href="{{url('/')}}">All Blogs</a>
-    </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('/blog')}}">Create Blog </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('/post/view')}}">My Blogs </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
       
     <!-- Blog Post -->
     <div class="blog-post">

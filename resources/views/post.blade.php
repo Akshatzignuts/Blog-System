@@ -86,9 +86,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('/')}}">Home</a>
-                </li>
+            
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
                 </li>
@@ -122,10 +120,10 @@
                     <div class="content "><strong>Content :</strong> {{ $result->content }}</div>
                     <div class="row mt-3">
                             <div class="col">
-                                <a href="{{url('/edit/blog'. $result->id)}}" class="btn btn-primary">Edit</a>
+                                <a href="{{url('/edit/blog/'. $result->id)}}" class="btn btn-primary">Edit</a>
                             </div>
                             <div class="col">
-                                <a href="{{url('/post/view') . "/" . $result->id}}" class="btn btn-danger">Delete</a>
+                                <a href="{{url('/post/delete') . "/" . $result->id}}" class="btn btn-danger">Delete</a>
                             </div>        
                     </div>
                 </div>

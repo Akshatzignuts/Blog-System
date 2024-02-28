@@ -14,21 +14,10 @@ class BlogController extends Controller
     // This function can be used to retrive all the post from all of the users
     public function allpost()
     {
+
         $posts = Post::orderBy("created_at", "desc")->paginate(10);
         return view("post.index", compact("posts"));
     }
-    //This function can be used to add comment on blog post
-
-    public function addComment(Request $request)
-    {
-        $comment = new Comment;
-        $comment->comments = $request['comment'];
-        $comment->post_id =  $request['post_id'];
-        $comment->user_id = Auth::id();
-        $comment->save();
-        return redirect()->back()->with('message', 'Comment addded successfully');
-    }
-
 
     //This function can be used to just see the Blog page where we can write the code 
     public function blogIndex()
@@ -52,12 +41,12 @@ class BlogController extends Controller
         $user = Auth::User();
         $id = $user->id;
         $stored = Post::where('user_id', '=', $id)->get();
-        return view('Post', compact('stored'));
+        return view('post', compact('stored'));
     }
     //This function can be used to edit your own blog 
     public function edit($id)
     {
-        $user = Auth::User();
+
         $title = Post::find($id);
         return view('edit', compact('title'))->with('success', 'Edited Successfully');
     }

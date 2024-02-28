@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\postController;
-use App\Http\Controllers\yourController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,26 +23,26 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/about', function () {
-    return view('about');
-});
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('all/blogs', [CommentController::class, 'addComment']);
+    Route::get('blog/comments',[[CommentController::class,'dislayComment']]);
+    Route::get('blog/edit/{id}', [CommentController::class,'editComment']);
+    
+
+    Route::get('all/blogs', [BlogController::class, 'allpost']);
+    Route::get('/blog', [BlogController::class, 'blogIndex']);
+    Route::post('/blog/create', [BlogController::class, 'blogContent']);
+
+    Route::get('/post/delete/{id}', [BlogController::class, 'delete']);
+    Route::get('/post/view', [BlogController::class, 'display']);
+    Route::get('/edit/blog/{id}', [BlogController::class, 'edit']);
+    Route::post('/edit/{id}', [BlogController::class, 'update']);
 });
 
-Route::get('all/blogs', [BlogController::class, 'allpost']);
-Route::post('all/blogs', [BlogController::class, 'addComment']);
-Route::get('/blog', [BlogController::class, 'blogIndex']);
-Route::post('/blog/create', [BlogController::class, 'blogContent']);
-Route::get('/post', [postController::class, 'postIndex']);
-Route::get('/post/view/{id}', [BlogController::class, 'delete']);
-Route::get('/post/view', [BlogController::class, 'display'])->middleware('auth');
-Route::get('/edit/blog{id}', [BlogController::class, 'edit']);
-Route::post('/edit/{id}', [BlogController::class, 'update']);
 
 require __DIR__ . '/auth.php';

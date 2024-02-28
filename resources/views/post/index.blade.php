@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            
         </h2>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </x-slot>   
@@ -11,6 +11,7 @@
             <a href = "{{url('/post/view')}}"><button class="btn-content" type="submit">My Blogs</button></a>
         <span>
     </div>
+    
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
@@ -31,14 +32,19 @@
                         @csrf
                             <div><textarea class="" id="comment" name="comment" rows="1" required></textarea></div>
                             <input type="hidden" name="post_id" value={{$post->id}}>
-                            <button class="btn btn-primary">Comment</button>
+                            <button class="btn btn-primary">Comment</button>  
+                            <button class="btn btn-primary">View</button>
+                            <a href="blog/edit/{id}" class="btn btn-primary">Edit</a>
+                            
+
                         </form>
                     </div>
                 @endforeach 
+               
             </div>
         </div>
     </div>
-
+   
 
 </x-app-layout>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
