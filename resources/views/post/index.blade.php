@@ -1,153 +1,100 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            
-        </h2>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </x-slot>   
-    <div>
-        <span class = "button">
-            <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Create Blogs</button></a>
-            <a href = "{{url('/post/view')}}"><button class="btn-content" type="submit">My Blogs</button></a>
-        <span>
-    </div>
-    
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-8">
-                <h2>Alls Blogs Posts</h2>
 
-                <!--it can dispaly success message  -->
-                @if(session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                @endif 
-                <!--it can dispaly all blogs posted  -->
-                @foreach($posts as $post)
-                    <div class = "result grid-table">
-                        <div class="title"><strong>Title :</strong>  {{ $post->title }}</div>
-                        <div class="content"><strong>Content :</strong> {{ $post->content }}</div>
-                        <form method="post" action = {{url('/all/blogs')}}>
-                        @csrf
-                            <div><textarea class="" id="comment" name="comment" rows="1" required></textarea></div>
-                            <input type="hidden" name="post_id" value={{$post->id}}>
-                            <button class="btn btn-primary">Comment</button>  
-                            <button class="btn btn-primary">View</button>
-                            <a href="blog/edit/{id}" class="btn btn-primary">Edit</a>
-                            
-
-                        </form>
-                    </div>
-                @endforeach 
-               
-            </div>
-        </div>
-    </div>
-   
-
-</x-app-layout>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Blogs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
-    .button
-    {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        gap: 20px;
-
+    .btn-wraper{
+    
+    display: flex;
+    justify-content: center;
+    position:static;
+    gap: 10px;
+    padding-bottom: 10px;
+    bottom: 15px;
+    
     }
-    .btn-content
-    {
-        display:flex;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease; 
+    .comment-text {
+    margin: 3px;
+    border-radius: 8px;    
     }
-    .blog-post {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color:wheat; 
-           
-        }
-    .result
-    {
-        width: 100%;
-        background-color: wheat;
+    .form-label {
+    margin-bottom: 0.5rem;
+    margin: 5px;
+    }   
+    .
+    .comment-text
+    {   
+        margin: 10px;
         padding: 10px;
-        margin: 30px;
-        border-radius: 25px;
-        align-items: center;
+    }
+    .card
+    {
+        border-radius: 20px;
+        background-color:wheat; 
 
-     }
-        .blog-post .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+      
+    }
+    .modal-content
+    {
+    word-wrap: break-word; 
+    overflow: auto; 
+    white-space: pre-line;
+    height:auto; 
+    overflow-y: auto;
+    }
+</style>
+</head>
 
-        .blog-post .content {
-            font-size: 16px;
-            line-height: 1.6;
-        }
+<body>
+    <!-- Navbar section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        .blog-post .id {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 5px;
-        }
-        .comment-form {
-    margin-top: 50px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .comment-form input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .comment-form input[type="text"]:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-
-  .comment-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .comment-form button:hover {
-    background-color: #0056b3;
-    font-family:'Arial Narrow Bold';
-  }
-
-
- 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/blog')}}">Create Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/post/view')}}">My Blogs</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs</a>
+                </li> 
+            </ul> 
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2>All Blogs Posts</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach($posts as $post)
+            <div class="col">
+            <div class="card h-100 w-100">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Title :</strong>  {{ $post->title }}</h5>
+                    <p class="card-text"><strong>Content :</strong> {!! strip_tags(Str::substr($post->content, 0, 10  )) !!}</p>   
+                    <div class= "btn-wraper">
+                        <a href="{{url('view/blog/comment/' . $post->id)}}" class="btn btn-success">View</a>
+                    </div>
+                </div>   
+            </div>  
+            </div>
+        @endforeach
+    </div>
+     
+ <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    
+</body>
+</html>
+<style>
+    
 </style>

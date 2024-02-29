@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
+
 class PostSeeder extends Seeder
 {
     /**
@@ -12,10 +15,10 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
-        $post = new Post();
-        $post->title = $faker->title;
-        $post->content = $faker->content;
-        
+       DB::table("posts")->insert([
+        "title"=> "hello",
+        "content"=> "bye",
+        "user_id" =>"1"
+       ]);
     }
 }

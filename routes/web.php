@@ -29,15 +29,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('all/blogs', [CommentController::class, 'addComment']);
-    Route::get('blog/comments',[[CommentController::class,'dislayComment']]);
-    Route::get('blog/edit/{id}', [CommentController::class,'editComment']);
-    
+    //Route::get('comment', [CommentController::class, 'index']);
+    Route::get('view/blog/comment/{id}', [CommentController::class, 'view']);
+    Route::get('comment/added', [CommentController::class, 'addComment']);
+    Route::get('comment/display', [[CommentController::class, 'dislayComment']]);
+    //Route::get('edit/comment', [CommentController::class, 'editComment']);
+    //Route::get('delete/comment/{}', [CommentController::class, 'deleteComment']);
+
 
     Route::get('all/blogs', [BlogController::class, 'allpost']);
     Route::get('/blog', [BlogController::class, 'blogIndex']);
     Route::post('/blog/create', [BlogController::class, 'blogContent']);
 
+    Route::get('/view/blog/{id}', [BlogController::class, 'view']);
     Route::get('/post/delete/{id}', [BlogController::class, 'delete']);
     Route::get('/post/view', [BlogController::class, 'display']);
     Route::get('/edit/blog/{id}', [BlogController::class, 'edit']);

@@ -14,7 +14,6 @@ class BlogController extends Controller
     // This function can be used to retrive all the post from all of the users
     public function allpost()
     {
-
         $posts = Post::orderBy("created_at", "desc")->paginate(10);
         return view("post.index", compact("posts"));
     }
@@ -43,12 +42,18 @@ class BlogController extends Controller
         $stored = Post::where('user_id', '=', $id)->get();
         return view('post', compact('stored'));
     }
+
     //This function can be used to edit your own blog 
     public function edit($id)
     {
 
         $title = Post::find($id);
         return view('edit', compact('title'))->with('success', 'Edited Successfully');
+    }
+    public function view(Request $request, $id)
+    {
+        $post = Post::find($id);
+        return view('view', compact('post'));
     }
     //This function can be used to update your edited blog
     public function update(Request $request, $id)

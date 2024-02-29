@@ -1,11 +1,10 @@
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,28 +14,31 @@
   <title>Blog Page</title>
 </head>
 <body>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/blog')}}">Create Blog </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/post/view')}}">My Blogs </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs </a>
-            </li>
-          </ul>
-        </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+          
+              <li class="nav-item">
+                  <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{{url('/blog')}}">Create Blog</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{{url('/post/view')}}">My Blogs</a>
+              </li> 
+              <li class="nav-item">
+                  <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs</a>
+              </li> 
+          </ul> 
       </div>
-    </nav>
-      
+  </nav>
+  <div class="container"  >  
     <!-- Blog Post -->
     <div class="blog-post">
       <h2 class="blog-title">Welcome To The Blog World!</h2>
@@ -53,6 +55,8 @@
       </form> 
     </div>
   </div> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </body>
 </html>
 
@@ -63,31 +67,7 @@ body {
       margin: 0;
       padding: 0;
       
-    }
-    .navbar {
-      background-color: #333; /* Background color */
-      overflow: hidden;
-      padding: 10px 20px;
-    }
-
-    .navbar a {
-      float: left;
-      color: #fff;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-    }
-
-    .navbar a:hover {
-      background-color: #ddd; /* Hover background color */
-      color: #333; /* Hover text color */
-    }
-
-    .navbar a.active {
-      background-color: #007bff; /* Active background color */
-      color: #fff; /* Active text color */
-    }
+    } 
     h2
     {
         font-family: Arial, sans-serif;

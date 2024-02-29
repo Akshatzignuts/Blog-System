@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -15,23 +16,28 @@ class CommentController extends Controller
 
     public function addComment(Request $request)
     {
+
         $comment = new Comment;
         $comment->comment = $request['comment'];
-        $comment->post_id =  $request['post_id'];
+        $comment->post_id = $request['post_id'];
         $comment->user_id = Auth::id();
         $comment->save();
-        return redirect()->back()->with('message', 'Comment addded successfully');
+        return redirect()->back()->with('message', 'Commented Successfully');
     }
-    public function displayComment()
+    public function view(Request $request, $id)
     {
-        $comments = Comment::all();
-        return view('post.index', compact('comments'));
+        $posts = Post::find($id);
+        return view('comment', compact('posts'));
     }
-    public function editComment($id)
+    public function displayComment(Request $request)
     {
-        $comment = Comment::find($id);
-        return view('post.index', compact('comment'))->with('success', 'Edited Successfully');
+        $display = Comment::all();
+        $comments = $display->comment;
+        return view('comment', compact('comments'));
     }
-    
+    public function editComment()
+    {
+        
+    }
     
 }

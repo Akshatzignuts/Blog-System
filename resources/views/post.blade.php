@@ -1,82 +1,39 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>My Blog Page</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .blog-post {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color:wheat; 
-        }
-        .result
-        {
-            width: 100%;
-            background-color: wheat;
-            padding: 10px;
-            margin: 30px;
-            border-radius: 25px;
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<style>
+    .btn-wraper{
+    
+    display: flex;
+    justify-content: center;
+    position: static;
+    gap: 10px;
+    padding-bottom: 10px;
+    bottom: 15px;
+    
 
-        }
-        .blog-post .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .blog-post .content {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .blog-post .id {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 5px;
-        }
-        .comment-form {
-            margin-top: 50px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .comment-form input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .comment-form input[type="text"]:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        .comment-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .comment-form button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    }
+    .card
+    {
+        border-radius: 20px;
+        background-color:w; 
+      
+    }
+    .modal-content
+    {
+    word-wrap: break-word; 
+    overflow: auto; 
+    white-space: pre-line;
+    height:auto; 
+    overflow-y: auto;
+    }
+</style>
 </head>
+
 <body>
     <!-- Navbar section -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -99,43 +56,69 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs</a>
                 </li> 
-            </ul>
+            </ul> 
         </div>
     </nav>
-    <!-- Blog Posts success message -->
-    @if(session('message'))
-    <div class="alert alert-success">
-    {{ session('message') }}
-    </div>
-    @endif
-    <!-- Blog Posts section -->
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6 mb-6 ">
-                <h2>My Blogs Posts</h2>
-                @foreach($stored as $result)
-                <div class = "result">
-                    
-                    <div class="title col "><strong>Title :</strong>  {{ $result->title }}</div>
-                    <div class="content "><strong>Content :</strong> {{ $result->content }}</div>
-                    <div class="row mt-3">
-                            <div class="col">
-                                <a href="{{url('/edit/blog/'. $result->id)}}" class="btn btn-primary">Edit</a>
-                            </div>
-                            <div class="col">
-                                <a href="{{url('/post/delete') . "/" . $result->id}}" class="btn btn-danger">Delete</a>
-                            </div>        
-                    </div>
-                </div>
-                @endforeach
+        <h2>My Blogs Posts</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach($stored as $result)
+            <div class="col">
+            <div class="card h-100 w-100">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>Title :</strong>  {{ $result->title }}</h5>
+                    <p class="card-text"><strong>Content :</strong>  {!! strip_tags(Str::substr($result->content, 0, 50    )) !!}</p>   
+                </div>   
+                <div class="btn-wraper">
+                    <a href="{{url('view/blog/'. $result->id)}}" class="btn btn-success">View</a>
+                    <a href="{{url('/edit/blog/'. $result->id)}}" class="btn btn-primary">Edit</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button> 
+
+                </div>   
+            </div>  
             </div>
-        </div>
+        @endforeach
     </div>
+
+   
+  <div class="modal fade"  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollabl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><strong>Title :</strong>  {{ $result->title }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+        </div>
+        <div>  
+            <p class="modal-content "><strong>Content :</strong>  {{$result->content}}</p>     
+        </div>
+      </div>
+
+    </div> 
+  </div>
     
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+    
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Blog</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are sure you want delete the blog?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="{{url('/post/delete') . "/" . $result->id}}" class="btn btn-danger">Confirm</a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+    
+ <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    
 </body>
 </html>
 <style>

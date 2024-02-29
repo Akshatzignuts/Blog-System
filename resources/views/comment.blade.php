@@ -1,27 +1,98 @@
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-8">
-            <h2>Alls Blogs Posts</h2>
 
-            <!--it can dispaly success message  -->
-            @if(session('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/blog')}}">Create Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/post/view')}}">My Blogs</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/all/blogs')}}">All Blogs</a>
+                </li> 
+            </ul> 
+        </div>
+    </nav>
+    <div class="container mt-4">  
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <button class="btn btn-primary" onclick="goBack()">Back</button>
+                <h2>Blog</h2>
+                <div class="row">
+                    <div class="card" style="width: 100rem;">
+                       
+                        <div class="card-body">
+                            <button class="btn btn-primary" onclick="goBack()">Back</button>
+                          <h1 class="card-title"><strong>Title :</strong> {{$post->title}}</h1>
+                          <p class="card-text"><strong>Content :</strong> {{$post->content}}</p>
+                        </div>
+                        <form method="" action = {{url('comment/added')}}>
+                            <label >Comment</label>
+                            <div>
+                                <textarea class="text-content" id="comment" name="comment" rows="2" required></textarea>
+                                <input type="hidden" name="post_id" value={{$posts->id}}>
+                            </div>
+                            
+                        </form>    
                     </div>
-            @endif 
-            <!--it can dispaly all blogs posted  -->
-            @foreach($posts as $post)
-                <div class = "result grid-table">
-                    <div class="title"><strong>Title :</strong>  {{ $post->title }}</div>
-                    <div class="content"><strong>Content :</strong> {{ $post->content }}</div>
-                    <form method="post" action = {{url('/all/blogs')}}>
-                    @csrf
-                        <div><textarea class="" id="comment" name="comment" rows="1" required></textarea></div>
-                        <input type="hidden" name="post_id" value={{$post->id}}>
-                        <button class="btn btn-primary">Comment</button>       
-                    </form>
                 </div>
-            @endforeach 
+                    <p class="d-inline-flex gap-1"> 
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            DisplayComment
+                        </button>
+                        @foreach($comments as $result)
+                        {{$result->comment}}       
+                        @endforeach
+                      </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body"> 
+                        </div>
+                      </div>
+                </div>       
+            </div>
         </div>
     </div>
-</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+      </script>
+</body>
+</html>
+
+<style>
+    .text-content
+    {
+        border-radius: 12px;
+    }
+    
+</style>
+
+
+
+
+
+
+
+
+
