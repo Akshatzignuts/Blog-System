@@ -26,18 +26,26 @@ class CommentController extends Controller
     }
     public function view(Request $request, $id)
     {
-        $posts = Post::find($id);
+        $posts = Post::findOrFail($id);
+
         return view('comment', compact('posts'));
     }
-    public function displayComment(Request $request)
+    public function displayComment()
     {
-        $display = Comment::all();
-        $comments = $display->comment;
-        return view('comment', compact('comments'));
+        $comments = Comment::all();
+        return view('comment/dsiplay', compact('comments'));
     }
-    public function editComment()
+
+    public function editComment($id)
     {
-        
+        $edit = Comment::findOrFail($id);
+        $edit->user_id = Auth::id();
+        return view('comment', compact('edit'))->with('success', 'Edited Successfully');
     }
-    
+
+    public function deleteCommnet($id)
+    {
+        $comment = Comment::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Data Deleted successfully');
+    }
 }

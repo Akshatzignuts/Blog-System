@@ -47,18 +47,18 @@ class BlogController extends Controller
     public function edit($id)
     {
 
-        $title = Post::find($id);
+        $title = Post::findOrFail($id);
         return view('edit', compact('title'))->with('success', 'Edited Successfully');
     }
     public function view(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         return view('view', compact('post'));
     }
     //This function can be used to update your edited blog
     public function update(Request $request, $id)
     {
-        $title = Post::find($id);
+        $title = Post::findOrFail($id);
         // $title->title = $request->editTitle;
         // $title->content = $request->editContent;
         $title->update($request->only('title', 'content'));
@@ -67,7 +67,7 @@ class BlogController extends Controller
     //This function can be used to delete your blog
     public function delete($id)
     {
-        $title = Post::find($id)->delete();
+        $title = Post::findOrFail($id)->delete();
         return redirect('post/view')->with('success', 'Data Deleted successfully');
     }
 }
