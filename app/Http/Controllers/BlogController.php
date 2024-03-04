@@ -15,7 +15,7 @@ class BlogController extends Controller
     public function allpost()
     {
         $posts = Post::orderBy("created_at", "desc")->paginate(10);
-        return view("post.index", compact("posts"));
+        return view("post.allpost", compact("posts"));
     }
 
     //This function can be used to just see the Blog page where we can write the code 
@@ -40,24 +40,28 @@ class BlogController extends Controller
         $user = Auth::User();
         $id = $user->id;
         $stored = Post::where('user_id', '=', $id)->get();
-        return view('post', compact('stored'));
+        return view('post.post  ', compact('stored'));
     }
 
     //This function can be used to edit your own blog 
     public function edit($id)
     {
-
         $title = Post::findOrFail($id);
-        return view('edit', compact('title'))->with('success', 'Edited Successfully');
+        return view('edit.edit', compact('title'))->with('success', 'Edited Successfully');
     }
+     //This function can be used to view your own blog 
     public function view(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
-        return view('view', compact('post'));
+        $post = Post::find($id);
+        return view('post.view', compact('post'));
     }
     //This function can be used to update your edited blog
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
         $title = Post::findOrFail($id);
         // $title->title = $request->editTitle;
         // $title->content = $request->editContent;
@@ -67,7 +71,10 @@ class BlogController extends Controller
     //This function can be used to delete your blog
     public function delete($id)
     {
+
+        // dd($id);
         $title = Post::findOrFail($id)->delete();
+
         return redirect('post/view')->with('success', 'Data Deleted successfully');
     }
 }

@@ -4,45 +4,11 @@
         <title>My Blog Page</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <style>
-            /* Custom CSS */
-            .blog-post {
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-
-            .blog-post .title {
-                font-size: 24px;
-                font-weight: bold;
-                margin-bottom: 10px;
-            }
-
-            .blog-post .content {
-                font-size: 16px;
-                line-height: 1.6;
-            }
-
-            .blog-post .id {
-                font-size: 14px;
-                color: #888;
-                margin-bottom: 5px;
-            }
-
-            /* Modal CSS */
-            #editModal .modal-dialog {
-                max-width: 500px;
-            }
-        </style>
+        
     </head>
         <body>
-            <!-- Navbar section -->
+            {{-- Navbar section --}}
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                     
@@ -61,28 +27,67 @@
                     </ul> 
                 </div>
             </nav>
-            <!-- Blog Post edit section-->
+            <button class="btn btn-primary" onclick="goBack()">Back</button> 
+            {{-- Blog Post edit section--}}
             <div class="modal-content">         
                     <div class="modal-body">
                         <form action="{{url('/edit').'/'.$title->id}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            
+                            @csrf  
                             <div class="form-group">
-                                <label for="editTitle">Title</label>
+                                <label for="editTitle"><strong>Title</strong></label>
                                 <input type="text" class="form-control" id="title"  name="title" value ="{{$title->title}}"required >
                             </div>
                             <div class="form-group">
-                                <label for="editContent">Content</label>
+                                <label for="editContent"><strong>Content</strong></label>
                                 <textarea class="form-control" id="content" name="content" rows="5" required>{{$title->content}}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </form>
                     </div>
             <div class="modal-footer">     
-                    
+              {{--This can be used to load bootstrap classes--}}      
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+            <script>
+                function goBack() {
+                     window.history.back();
+                 }
+            </script>
         </body>
 </html>
+<style>
+    /* Custom CSS */
+    .blog-post {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .blog-post .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .blog-post .content {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .blog-post .id {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 5px;
+    }
+
+    /* Modal CSS */
+    #editModal .modal-dialog {
+        max-width: 500px;
+    }
+    .btn
+    {
+      margin: 1%
+    }
+</style>

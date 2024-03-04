@@ -1,28 +1,19 @@
 
 
-<!-- Optional theme -->
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-
+    {{--This can be used for navigation bar--}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-          
               <li class="nav-item">
                   <a class="nav-link" href="{{url('/dashboard')}}">Dashboard</a>
               </li>
@@ -37,14 +28,34 @@
               </li> 
           </ul> 
       </div>
+      {{--This can be used for log out and  profile view--}}
+      <div class="nav-item">
+        <ul class="navbar-nav mr-auto">
+          <li>
+              <x-responsive-nav-link :href="route('profile.edit')">
+                  {{ __('Profile') }}
+              </x-responsive-nav-link>
+          </li>
+          <li>
+              {{-- Authentication --}}
+              <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <x-responsive-nav-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                  </x-responsive-nav-link>
+              </form>
+          </li>
+        </ul> 
+      </div>
   </nav>
   <div class="container"  >  
-    <!-- Blog Post -->
+    {{--This can be used for Heading of the page --}}
     <div class="blog-post">
       <h2 class="blog-title">Welcome To The Blog World!</h2>
-      <div class="blog-content"> </div>
     </div>
-    <!-- Blog Post Form -->
+    {{--This can be used for blog post form--}}
     <div class="blog-form">
       <h2>Add a New Blog Post</h2>
       <form action="{{url('/blog/create')}}" method="post">

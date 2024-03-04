@@ -11,8 +11,8 @@ The system developed using Laravel Breeze, a minimal authentication scaffolding 
 
 ## Requirements
 
--   PHP >= 8.3.
--   Composer>= 2.5.4
+-   PHP = 8.3.
+-   Composer = 2.5.4
 -   Node.js & NPM
 -   MySQL
 

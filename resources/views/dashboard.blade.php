@@ -25,6 +25,7 @@
     </div>
     
 </x-app-layout>
+
 <!-- css  -->
 <style>
     .button

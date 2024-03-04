@@ -33,8 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::get('view/blog/comment/{id}', [CommentController::class, 'view']);
     Route::post('/comment/added', [CommentController::class, 'addComment']);
     Route::get('comment/display', [CommentController::class, 'displayComment']);
-    //Route::get('edit/comment', [CommentController::class, 'editComment']);
-    //Route::get('delete/comment/{}', [CommentController::class, 'deleteComment']);
+    Route::get('edit/comment/{id}', [CommentController::class, 'editComment']);
+    Route::post('view/blog/comment/{id}', [CommentController::class, 'updateComment']);
+    Route::get('delete/comment/{id}', [CommentController::class, 'deleteComment']);
+    //Route::resource('comments{id}', CommentController::class)->only(['view', 'updateComment', 'deleteComment']);
 
 
     Route::get('all/blogs', [BlogController::class, 'allpost']);
