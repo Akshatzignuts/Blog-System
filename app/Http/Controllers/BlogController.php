@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -26,12 +27,14 @@ class BlogController extends Controller
     //This function can be used store the data of  blog posted
     public function blogContent(Request $request)
     {
-        $user = Auth::User();
-        $save = new Post;
-        $save->title = $request['title'];
-        $save->content = $request['content'];
-        $save->user_id = Auth::id();
-        $save->save();
+        $request->validate(
+            [
+                'title' => 'required',
+                'content' => 'required'
+            ]
+        );
+        $user = Post::create($request->only('title', 'content')
+            + ['user_id' => auth()->user()->id]);
         return redirect('post/view')->with('message', 'Blog posted successfully');
     }
     //This function can be used to display your own data which is posted by user itself
@@ -49,9 +52,10 @@ class BlogController extends Controller
         $title = Post::findOrFail($id);
         return view('edit.edit', compact('title'))->with('success', 'Edited Successfully');
     }
-     //This function can be used to view your own blog 
+    //This function can be used to view your own blog 
     public function view(Request $request, $id)
     {
+
         $post = Post::find($id);
         return view('post.view', compact('post'));
     }
@@ -63,8 +67,6 @@ class BlogController extends Controller
             'content' => 'required'
         ]);
         $title = Post::findOrFail($id);
-        // $title->title = $request->editTitle;
-        // $title->content = $request->editContent;
         $title->update($request->only('title', 'content'));
         return redirect('post/view');
     }

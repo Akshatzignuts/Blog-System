@@ -13,25 +13,22 @@ class CommentController extends Controller
 {
 
     //This function can be used to add comment on blog post
-
     public function addComment(Request $request)
     {
-
-        $comment = new Comment;
-        $comment->comment = $request['comment'];
-        $comment->post_id = $request['post_id'];
-        $comment->user_id = Auth::id();
-        $comment->save();
+        $comment = Comment::create(
+            $request->only('comment', 'post_id')
+                + [
+                    'user_id' => auth()->user()->id
+                ]
+        ); // + used to concate the user_id data which to retrieve the user_id
         return redirect()->back()->with('message', 'Commented Successfully');
     }
     //This function can be used to view a single blog post
     public function view(Request $request, $id)
     {
         $comments = Post::with('comment')->findOrFail($id);
-        //comments);
         return view('comment.comment', compact('comments'));
     }
-
     //This function can be used to edit comment on blog post
     public function editComment($id)
     {
@@ -47,7 +44,7 @@ class CommentController extends Controller
     public function updateComment(Request $request, $id)
     {
         $edit = Comment::findOrFail($id);
-
+      
         $edit->update($request->only('comment'));
         return redirect('view/blog/comment{id}');
     }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use App\Models\Post;
 use App\Models\User;
+use Brick\Math\BigInteger;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
