@@ -29,7 +29,7 @@
             </ul> 
         </div>
     </nav>
-    <form action="{{url('view/blog/comment/' . $edit->post_id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('comment.update', $edit->post_id) }}" method="get" enctype="multipart/form-data">
       @csrf
        <h1>Edit Blog Post</h1>
         <textarea class="form-control" id="content" name="content" rows="5" required>{{$edit->comment}}</textarea>

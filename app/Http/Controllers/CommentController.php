@@ -46,11 +46,8 @@ class CommentController extends Controller
     //This function can be used to update your own blog 
     public function updateComment(Request $request, $id)
     {
-        $request->validate([
-
-            'comment' => 'required'
-        ]);
         $edit = Comment::findOrFail($id);
+
         $edit->update($request->only('comment'));
         return redirect('view/blog/comment{id}');
     }

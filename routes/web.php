@@ -30,11 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Route::get('comment', [CommentController::class, 'index']);
-    Route::get('view/blog/comment/{id}', [CommentController::class, 'view']);
+    Route::get('view/blog/comment/{id}', [CommentController::class, 'view'])->name('comment.update');
     Route::post('/comment/added', [CommentController::class, 'addComment']);
     Route::get('comment/display', [CommentController::class, 'displayComment']);
     Route::get('edit/comment/{id}', [CommentController::class, 'editComment']);
-    Route::post('view/blog/comment/{id}', [CommentController::class, 'updateComment']);
+    Route::post('edit/blog/comment/{id}', [CommentController::class, 'updateComment']);
     Route::get('delete/comment/{id}', [CommentController::class, 'deleteComment']);
     //Route::resource('comments{id}', CommentController::class)->only(['view', 'updateComment', 'deleteComment']);
 

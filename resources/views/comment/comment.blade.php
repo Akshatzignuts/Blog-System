@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog</title>
+    <title>Document</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -59,67 +59,67 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <!--This can be use to go backto previous page -->
-                <a  href = "{{url('all/blogs/')}}" class="btn btn-primary" ">Back </a> 
+                <a  href = "{{url('all/blogs/')}}" class="btn btn-primary" ">Back </a>
+                
                 <div class="row">
-                 <div class="card" style="width: 100rem;">  
-                        <div class="card-body text-center">
+                    <div class="card" style="width: 100rem;">   
+                        <div class="card-body">
                                 {{--This can be use to display heading of the page --}}
                                 <h2>Blog</h2>
                                 {{--This can be use to display single post which we want to see --}}
                             <h1 class="card-title"><strong>Title :</strong> {{$comments->title}}</h1>
                             <p class="card-text"><strong>Content :</strong> {{$comments->content}}</p>
                         </div>
-                        <div class = "text-center">
                              {{--This can be use to add comment in database --}}
                             <form method="post" action = {{url('/comment/added')}}>
                                 @csrf
-                                <div><textarea class="text-content " id="comment" name="comment" rows="2"></textarea> <input type="hidden" name="post_id" value={{$comments->id}} required></textarea></div>
+                                <div><textarea class="text-content" id="comment" name="comment" rows="2"></textarea> <input type="hidden" name="post_id" value={{$comments->id}} required></textarea></div>
                                 <button class="btn btn-primary">Comment</button>  
                             </form>
-                        </div>
-                            {{--This can be use to display display the success message --}}
-                        @if(session('message'))
-                        <div class="alert alert-success">
-                        {{ session('message') }}
-                            </div>
-                        @endif 
-                        <div class="container">
-                            <h4 class="mt-4 text-center">Display Comments</h4> 
-                            <div class="row justify-content-center">
-                                <div class="col-md-8">
-                                        <div class="card mb-2">
-                                            {{--This can be used to display commeny ,content and title of a specific function--}}
-                                            @foreach ($comments->comment as $comment)
+                             {{--This can be use to display display the success message --}}
+                            @if(session('message'))
+                            <div class="alert alert-success">
+                           {{ session('message') }}
+                             </div>
+                            @endif 
+                            <div class="container">
+                                <h4 class="mt-4 text-center">Display Comments</h4> 
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                            <div class="card mb-2">
+                                              
+                                                @foreach ($comments->comment as $comment)
+                                                
                                                 <div class="card-body d-flex justify-content-between align-items-center">
                                                     <p class="mb-0">{{$comment->comment}}</p>
                                                     
-                                                    {{-- Delete Button --}}
+                                                    <!-- Delete Button -->
                                                     <div class="mt-2">
                                                         <a href="{{url('/delete/comment' . "/" . $comment->id)}}" class="btn btn-danger">Delete</a>
                                                         <a class="btn btn-primary" href="{{url('edit/comment/' . $comment->id)}}">Edit</a>
                                                     </div>
-                                                    @if(session('success'))
-                                                        <div class="alert alert-success">
-                                                        {{ session('success') }}
-                                                    @endif
                                                 </div>
-                                            @endforeach
-                                            @if(session('error'))
-                                                <div class="alert alert-danger">
-                                                    {{ session('error') }}
-                                                </div>
+                                                @endforeach
+                                                @if(session('success'))
+                                                <div class="alert alert-success">
+                                                 {{ session('success') }}
                                             @endif
-                                        </div>
+                                            </div>
+                                    </div>
                                 </div>
-                            </div>
-                        <div>                       
+                            <div>                       
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script>
         function goBack() {
           window.history.back();
         }
-    </script>   
+    </script>
+      
 </body>
 </html>
 
