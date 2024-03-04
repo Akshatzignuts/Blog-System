@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Blog Page</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -67,7 +67,7 @@
                                 {{--This can be use to display heading of the page --}}
                                 <h2>Blog</h2>
                                 {{--This can be use to display single post which we want to see --}}
-                            <h1 class="card-title"><strong>Title :</strong> {{$comments->title}}</h1>
+                            <h4 class="card-title"><strong>Title :</strong> {{$comments->title}}</h4>
                             <p class="card-text"><strong>Content :</strong> {{$comments->content}}</p>
                         </div>
                              {{--This can be use to add comment in database --}}
@@ -86,23 +86,24 @@
                                 <h4 class="mt-4 text-center">Display Comments</h4> 
                                 <div class="row justify-content-center">
                                     <div class="col-md-8">
-                                            <div class="card mb-2">
-                                              
+                                            <div class="card mb-2">  
                                                 @foreach ($comments->comment as $comment)
-                                                
                                                 <div class="card-body d-flex justify-content-between align-items-center">
-                                                    <p class="mb-0">{{$comment->comment}}</p>
-                                                    
+                                                    <p class="mb-0">{{$comment->comment}}</p>  
                                                     <!-- Delete Button -->
+                                                    {{--To Authenticate user to comment and edit--}}
+                                                    @if(Auth::user()->id == $comment->user_id) 
+                                                    {{--{{dd(Auth::user()->id , $comment->user_id)}}--}}
                                                     <div class="mt-2">
                                                         <a href="{{url('/delete/comment' . "/" . $comment->id)}}" class="btn btn-danger">Delete</a>
                                                         <a class="btn btn-primary" href="{{url('edit/comment/' . $comment->id)}}">Edit</a>
-                                                    </div>
+                                                    </div>  
+                                                    @endif
                                                 </div>
                                                 @endforeach
-                                                @if(session('success'))
+                                                @if(session('error'))
                                                 <div class="alert alert-success">
-                                                 {{ session('success') }}
+                                                 {{ session('error') }}
                                             @endif
                                             </div>
                                     </div>
