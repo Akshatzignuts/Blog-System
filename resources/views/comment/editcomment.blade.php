@@ -29,10 +29,10 @@
             </ul> 
         </div>
     </nav>
-    <form action="{{ route('comment.update', $edit->post_id) }}" method="get" enctype="multipart/form-data">
+    <form action="{{url('edit/blog/comment/' . $edit->id)}}" method="post" enctype="multipart/form-data">
       @csrf
-       <h1>Edit Blog Post</h1>
-        <textarea class="form-control" id="content" name="content" rows="5" required>{{$edit->comment}}</textarea>
+       <h1>Edit Comment</h1>
+        <textarea class="form-control" id="content" name="comment" rows="5" required>{{$edit->comment}}</textarea>
         <div class = 'button'>
             <button type="submit" class="btn btn-primary">Save Changes</button> 
         </div>

@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Route::get('comment', [CommentController::class, 'index']);
-    Route::get('view/blog/comment/{id}', [CommentController::class, 'view'])->name('comment.update');
+    Route::get('view/blog/comment/{id}', [CommentController::class, 'view']);
     Route::post('/comment/added', [CommentController::class, 'addComment']);
     Route::get('comment/display', [CommentController::class, 'displayComment']);
     Route::get('edit/comment/{id}', [CommentController::class, 'editComment']);
