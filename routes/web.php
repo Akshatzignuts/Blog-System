@@ -29,25 +29,25 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //Route::get('comment', [CommentController::class, 'index']);
-    Route::get('view/blog/comment/{id}', [CommentController::class, 'view']);
-    Route::post('/comment/added', [CommentController::class, 'addComment']);
-    Route::get('comment/display', [CommentController::class, 'displayComment']);
-    Route::get('edit/comment/{id}', [CommentController::class, 'editComment']);
-    Route::post('edit/blog/comment/{id}', [CommentController::class, 'updateComment']);
-    Route::get('delete/comment/{id}', [CommentController::class, 'deleteComment']);
-    //Route::resource('comments{id}', CommentController::class)->only(['view', 'updateComment', 'deleteComment']);
+    Route::get('/blog/{id}', [CommentController::class, 'view']);
+    Route::group(['prefix' => '/comment'], function () {
+        Route::post('/add', [CommentController::class, 'addComment']);
+        Route::get('/edit/{id}', [CommentController::class, 'editComment']);
+        Route::post('/edit/{id}', [CommentController::class, 'updateComment']);
+        Route::get('/delete/{id}', [CommentController::class, 'deleteComment']);
+    });
 
-
-    Route::get('all/blogs', [BlogController::class, 'allpost']);
-    Route::get('/blog', [BlogController::class, 'blogIndex']);
-    Route::post('/blog/create', [BlogController::class, 'blogContent']);
-
-    Route::get('/view/blog/{id}', [BlogController::class, 'view']);
-    Route::get('/post/delete/{id}', [BlogController::class, 'delete']);
-    Route::get('/post/view', [BlogController::class, 'display']);
-    Route::get('/edit/blog/{id}', [BlogController::class, 'edit']);
-    Route::post('/edit/{id}', [BlogController::class, 'update']);
+    Route::get('/all/blogs', [BlogController::class, 'posts']);
+    Route::get('post/view', [BlogController::class, 'display']);
+    
+    Route::group(['prefix' => '/blog'], function () {
+        Route::get('', [BlogController::class, 'blogIndex']);
+        Route::post('/create', [BlogController::class, 'addBlog']);
+        Route::get('/view/{id}', [BlogController::class, 'view']);
+        Route::get('/delete/{id}', [BlogController::class, 'delete']);
+        Route::get('/edit/{id}', [BlogController::class, 'edit']);
+        Route::post('/edit/{id}', [BlogController::class, 'update']);
+    });
 });
 
 

@@ -13,7 +13,7 @@ class BlogController extends Controller
 {
 
     // This function can be used to retrive all the post from all of the users
-    public function allpost()
+    public function posts()
     {
         $posts = Post::orderBy("created_at", "desc")->paginate(10);
         return view("post.allpost", compact("posts"));
@@ -25,7 +25,7 @@ class BlogController extends Controller
         return view("blog");
     }
     //This function can be used store the data of  blog posted
-    public function blogContent(Request $request)
+    public function addBlog(Request $request)
     {
         $request->validate(
             [
@@ -43,9 +43,8 @@ class BlogController extends Controller
         $user = Auth::User();
         $id = $user->id;
         $stored = Post::where('user_id', '=', $id)->get();
-        return view('post.post  ', compact('stored'));
+        return view('post.post', compact('stored'));
     }
-
     //This function can be used to edit your own blog 
     public function edit($id)
     {
@@ -68,12 +67,11 @@ class BlogController extends Controller
         ]);
         $title = Post::findOrFail($id);
         $title->update($request->only('title', 'content'));
-        return redirect('post/view');
+        return redirect('/post/view');
     }
     //This function can be used to delete your blog
     public function delete($id)
     {
-
         // dd($id);
         $title = Post::findOrFail($id)->delete();
 

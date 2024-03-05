@@ -15,6 +15,9 @@ class CommentController extends Controller
     //This function can be used to add comment on blog post
     public function addComment(Request $request)
     {
+        $request->validate([
+            'comment' => 'required'
+        ]);
         $comment = Comment::create(
             $request->only('comment', 'post_id')
                 + [
@@ -32,7 +35,6 @@ class CommentController extends Controller
     //This function can be used to edit comment on blog post
     public function editComment($id)
     {
-
         $edit = Comment::findOrFail($id);
         if (Auth::user()->id !== $edit->user_id) {
             session()->flash('error', 'You cannot edit this comment!');
@@ -43,15 +45,13 @@ class CommentController extends Controller
     //This function can be used to update your own blog 
     public function updateComment(Request $request, $id)
     {
-
         $edit = Comment::findOrFail($id);
         $edit->update($request->only('comment'));
-        return redirect('view/blog/comment/' . $edit->post_id);
+        return redirect('/blog/' . $edit->post_id);
     }
     //This function can be used to delete comment on blog post
     public function deleteComment($id)
     {
-
         $comment = Comment::findOrFail($id);
         if (Auth::user()->id !== $comment->user_id) {
             session()->flash('error', 'You cannot delete this comment because it is not commented by you!');

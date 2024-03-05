@@ -19,7 +19,7 @@
     <div>
         <span class= "button">
             <a href = "{{url('/blog')}}"><button class="btn-content" type="submit">Create Blogs</button></a>
-            <a href = "{{url('/post/view')}}"><button class="btn-content" type="submit">My Blogs</button></a>
+            <a href = "{{url('post/view')}}"><button class="btn-content" type="submit">My Blogs</button></a>
             <a href = "{{url('/all/blogs')}}"><button class="btn-content" type="submit">All Blogs</button></a>
           </span>
     </div>
